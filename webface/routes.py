@@ -98,6 +98,8 @@ def obdelnik():
 @login_required
 @db_session
 def zkracovac():
+    uzivatel = session.get("user")
+    zkratky = list(Zkracovac.select(uzivatel = uzivatel))
     if request.method == "POST":
         url = request.form.get("url")
         if url:
@@ -110,13 +112,13 @@ def zkracovac():
                 for i in range(7):
                     i = choice(pismena)
                     zkratka += i
-                Zkracovac(url = url, zkratka = zkratka)
-            return render_template("zkracovac.html.j2", zprava = f"{request.url}/{zkratka}")
+                Zkracovac(url = url, zkratka = zkratka, uzivatel = uzivatel)
+            return render_template("zkracovac.html.j2", zprava = f"{request.url}/{zkratka}", zkratky = zkratky)
         else:
-            return render_template("zkracovac.html.j2")
+            return render_template("zkracovac.html.j2", zkratky = zkratky)
 
     else:
-        return render_template("zkracovac.html.j2")
+        return render_template("zkracovac.html.j2", zkratky = zkratky)
 
 
 @app.route('/zkracovac/<string:zkratka>')

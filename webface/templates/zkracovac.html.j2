@@ -29,6 +29,13 @@
   </form>
   {{zprava}}
 
+<h3>Zkratky</h3>
+{% for zkratka in zkratky %}
+{{zkratka.zkratka}}
+{{zkratka.url}}
+{% endfor %}
+
+
 <footer>
 <font size="5"><p>Pro více info klikněte<a href="https://www.vypocitejto.cz/"> zde</a></p></font>
 </footer>
