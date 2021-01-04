@@ -1,5 +1,5 @@
 # from datetime import datetime
-from pony.orm import PrimaryKey, Required, Optional, Database  # , Set
+from pony.orm import PrimaryKey, Required, Optional, Database, Set
 
 
 db = Database()
@@ -11,6 +11,13 @@ class Uzivatel(db.Entity):
     login = Required(str)
     password = Required(str)
     email = Optional(str)
+    
+class Zkracovac(db.Entity):
+    zkratka = PrimaryKey(str)
+    url = Required(str)
+    uzivatel = Optional(str)
+    
+
 
 
 db.generate_mapping(create_tables=True)
